@@ -1,0 +1,30 @@
+{
+   "type": "cockroachdb",
+   "host": "free-tier6.gcp-asia-southeast1.cockroachlabs.cloud",
+   "port": 26257,
+   "username": "divyanshu",
+   "password": "_4wiUSxjs3OpGXir",
+   "database": "db-cockroach-01-2147.defaultdb",
+   "synchronize": false,
+   "logging": true,
+   "ssl": true,
+   "extra": {
+      "ssl": {
+         "rejectUnauthorized": false
+      }
+   },
+   "entities": [
+      "src/models/**/*.ts"
+   ],
+   "migrations": [
+      "src/migration/**/*.ts"
+   ],
+   "subscribers": [
+      "src/subscriber/**/*.ts"
+   ],
+   "cli": {
+      "entitiesDir": "src/models",
+      "migrationsDir": "src/migration",
+      "subscribersDir": "src/subscriber"
+   }
+}
