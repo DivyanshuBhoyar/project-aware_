@@ -39,7 +39,7 @@ export class Story extends BaseEntity {
     updated_at: Date
 
     @Field()
-    @Column("bigint", { default: 0 })
+    @Column('smallint', { default: 0 })
     reads: number
 
 }

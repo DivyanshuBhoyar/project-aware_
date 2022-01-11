@@ -5,7 +5,7 @@
    "username": "divyanshu",
    "password": "_4wiUSxjs3OpGXir",
    "database": "db-cockroach-01-2147.defaultdb",
-   "synchronize": false,
+   "synchronize": true,
    "logging": true,
    "ssl": true,
    "extra": {
@@ -14,7 +14,7 @@
       }
    },
    "entities": [
-      "src/models/**/*.ts"
+      "src/entities/**/*.ts"
    ],
    "migrations": [
       "src/migration/**/*.ts"
@@ -23,7 +23,7 @@
       "src/subscriber/**/*.ts"
    ],
    "cli": {
-      "entitiesDir": "src/models",
+      "entitiesDir": "src/entities",
       "migrationsDir": "src/migration",
       "subscribersDir": "src/subscriber"
    }
