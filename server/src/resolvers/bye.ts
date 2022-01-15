@@ -1,5 +1,6 @@
 import { Resolver, Mutation, Arg, Field, ObjectType, Query } from "type-graphql";
 
+
 @ObjectType()
 class FieldError {
     @Field()

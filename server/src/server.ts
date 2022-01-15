@@ -6,14 +6,20 @@ import { ApolloServer } from 'apollo-server-express';
 import { buildSchemaSync } from 'type-graphql';
 import { ByeResolver } from './resolvers/bye';
 import { StoryResolver } from './resolvers/story';
-import { UserResolver } from './resolvers/user';
+import { AuthResolver } from './resolvers/auth';
+import { httpRouter } from './resolvers/http';
+
 
 const main = async () => {
     const app = express();
     await createConnection()
+
+    app.use('/api', httpRouter)
+    app.get('/hello', (_, res) => res.send('hello world'))
+
     const apolloServer = new ApolloServer({
         schema: await buildSchemaSync({
-            resolvers: [ByeResolver, StoryResolver, UserResolver],
+            resolvers: [ByeResolver, StoryResolver, AuthResolver],
         }),
         context: ({ req, res }) => ({ req, res })
     })

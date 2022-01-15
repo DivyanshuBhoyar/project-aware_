@@ -11,7 +11,7 @@ export class NewUserInput {
 
     @Field()
     @IsEmail()
-    @IsEmailAlreadyExist({ message: "Eail already exists" })
+    @IsEmailAlreadyExist({ message: "Email already exists" })
     email: string
 
 

@@ -5,13 +5,12 @@ import { NewStoryInput } from "./partials/newStoryInput";
 import { UpvoteAndReadArgs } from "./partials/upvoteArgs";
 import { UserInputError } from "apollo-server-express";
 
-
 @Resolver()
 export class StoryResolver {
 
     @Query(() => [Story])
     async getStories(): Promise<Story[]> {
-        return Story.find();
+        return await Story.find();
     }
 
     @Query(() => Story)

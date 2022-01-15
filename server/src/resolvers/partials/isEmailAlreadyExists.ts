@@ -11,7 +11,7 @@ import { User } from "../../entities/User";
 export class IsEmailAlreadyExistConstraint
     implements ValidatorConstraintInterface {
     validate(email: string) {
-        return User.findOne({ where: { email } }).then(user => {
+        return User.findOne({ where: { email, is_activated: true } }).then(user => {
             if (user) return false;
             return true;
         });
