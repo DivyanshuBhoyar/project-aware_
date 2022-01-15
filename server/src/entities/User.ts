@@ -10,7 +10,7 @@ export class User extends BaseEntity {
     @Column({ nullable: false })
     name: string
 
-    @Column("text", { unique: true })
+    @Column("text", { nullable: false })
     email: string
 
     @Column('bool', { default: false })

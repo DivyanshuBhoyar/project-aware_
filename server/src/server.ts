@@ -8,11 +8,16 @@ import { ByeResolver } from './resolvers/bye';
 import { StoryResolver } from './resolvers/story';
 import { AuthResolver } from './resolvers/auth';
 import { httpRouter } from './resolvers/http';
-
+import mongoose from 'mongoose';
 
 const main = async () => {
     const app = express();
-    await createConnection()
+    await createConnection();
+    console.log('💽 Connected to cockroachdb');
+
+    await mongoose.connect('mongodb+srv://hatwaarbeta:mongo7038@devcluster0.hdvnq.mongodb.net/aware?retryWrites=true&w=majority')
+    console.log("🏪 Mongodb Atlas connected")
+
 
     app.use('/api', httpRouter)
     app.get('/hello', (_, res) => res.send('hello world'))
