@@ -1,37 +1,13 @@
 
 import { Story } from "../entities/Story";
-import { Arg, Int, Mutation, Query, Resolver } from "type-graphql";
-import { NewStoryInput } from "./partials/newStoryInput";
+import { Arg, Int, Mutation, Resolver } from "type-graphql";
 import { UpvoteAndReadArgs } from "./partials/upvoteArgs";
 import { UserInputError } from "apollo-server-express";
 
 @Resolver()
 export class StoryResolver {
 
-    @Query(() => [Story])
-    async getStories(): Promise<Story[]> {
-        return await Story.find();
-    }
 
-    @Query(() => Story)
-    async getStory(
-        @Arg('id') id: string
-    ): Promise<Story> {
-        const story = await Story.findOne(id)
-        if (!story) {
-            throw new UserInputError(`Story with id ${id} not found`)
-        }
-        return story;
-    }
-
-    @Mutation(() => Story)
-    async newStory(
-        @Arg('data') newData: NewStoryInput
-    ): Promise<Story> {
-        const story = Story.create(newData);
-        await story.save();
-        return story;
-    }
 
     @Mutation(() => Int)
     async upvoteStory(
