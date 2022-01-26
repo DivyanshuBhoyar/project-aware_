@@ -4,7 +4,7 @@ import { InputType, Field } from "type-graphql";
 @InputType()
 export class NewStoryInput {
     @Field()
-    @MaxLength(30)
+    @MaxLength(100)
     title: string;
 
     @Field()

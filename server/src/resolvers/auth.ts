@@ -125,7 +125,7 @@ export class AuthResolver {
 
         // generate jwt token
         const token = sign({ userId: user.id, username: user.username, email: user.email }, "KALASH SECRET", {
-            expiresIn: "1h"
+            expiresIn: "4h"
         })
         await redis.del(otp)
         return { user, token }
