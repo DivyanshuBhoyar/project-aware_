@@ -1,10 +1,18 @@
 import { UserInputError } from "apollo-server-express";
 import { Story } from "../entities/Story";
-import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Authorized, Ctx, FieldResolver, Mutation, Query, Resolver, Root, } from "type-graphql";
 import { NewStoryInput } from "./partials/newStoryInput";
+import { User } from "../entities/User";
 
-@Resolver()
+@Resolver(() => Story)
 export class StoryCRUDResolver {
+
+
+    @FieldResolver()
+    async creator(@Root() story: Story): Promise<User> {
+        return await User.findOneOrFail(story.creatorId)
+    }
+
 
     @Query(() => [Story])
     async getStories(): Promise<Story[]> {
@@ -28,7 +36,8 @@ export class StoryCRUDResolver {
         @Arg('newStoryData') newStoryData: NewStoryInput,
         @Ctx() ctx
     ): Promise<Story> {
-        const story = Story.create({ ...newStoryData, user_id: ctx.req.user.userId })
+        console.log("idreceived", ctx.req.user.userId)
+        const story = Story.create({ ...newStoryData, creatorId: ctx.req.user.userId })
         await story.save();
         return story;
     }

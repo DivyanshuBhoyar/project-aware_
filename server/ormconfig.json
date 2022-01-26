@@ -7,6 +7,7 @@
    "database": "db-cockroach-01-2147.defaultdb",
    "synchronize": true,
    "ssl": true,
+   "logging": true,
    "extra": {
       "ssl": {
          "rejectUnauthorized": false

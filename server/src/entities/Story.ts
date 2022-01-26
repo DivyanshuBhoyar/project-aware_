@@ -1,5 +1,6 @@
 import { Field, ID, ObjectType } from "type-graphql";
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, BaseEntity, ManyToOne } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, BaseEntity, ManyToOne, OneToMany } from "typeorm";
+import { Upvote } from "./Upvotes";
 import { User } from "./User";
 
 @ObjectType()
@@ -24,17 +25,24 @@ export class Story extends BaseEntity {
     @Column('text')
     description: string
 
-    @ManyToOne(() => User, user => user.id)
     @Field()
     @Column()
-    user_id: string
+    creatorId: number;
 
+    @ManyToOne(() => User, user => user.stories)
     @Field()
-    @Column({ default: 0 })
-    upvotes: number
+    creator: User
+
+    @OneToMany(() => Upvote, upvote => upvote.post)
+    upvotes: Upvote[]
 
     @Column({ default: 0 })
     reports: number
+
+
+    @Field()
+    @Column('smallint', { default: 0 })
+    reads: number
 
     @Field()
     @CreateDateColumn()
@@ -43,9 +51,4 @@ export class Story extends BaseEntity {
     @Field()
     @UpdateDateColumn()
     updated_at: Date
-
-    @Field()
-    @Column('smallint', { default: 0 })
-    reads: number
-
 }

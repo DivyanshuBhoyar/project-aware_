@@ -6,6 +6,7 @@ import { AuthChecker } from "type-graphql";
 
 export const customAuthChecker: AuthChecker<{ req: { user: any; }, res: any }> = ({ context }, roles) => {
     const user = context.req.user
+    console.log(user)
     if (roles.length === 0) {
         // if `@Authorized()`, check only if user exists
         return user?.userId !== undefined;
